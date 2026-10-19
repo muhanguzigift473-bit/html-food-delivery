@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteDash | Gourmet Food Delivery</title>
+    <!-- Lightweight, modern CSS library for clean styling -->
+    <link rel="stylesheet" href="https://jsdelivr.net">
+    <style>
+        :root {
+            --brand-color: #ff4757;
+            --brand-hover: #e84118;
+        }
+        body { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--brand-color); text-decoration: none; }
+        nav a { margin-left: 20px; font-weight: 600; text-decoration: none; color: inherit; }
+        nav a:hover { color: var(--brand-color); }
+        
+        .hero { text-align: center; padding: 4rem 1rem; background: rgba(255, 71, 87, 0.05); border-radius: 12px; margin-bottom: 3rem; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero button { background-color: var(--brand-color); color: white; border: none; padding: 12px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; }
+        .hero button:hover { background-color: var(--brand-hover); }
+        
+        .section-title { text-align: center; margin-top: 3rem; margin-bottom: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 3rem; }
+        .card { border: 1px solid rgba(0,0,0,0.1); padding: 20px; border-radius: 8px; background: rgba(255,255,255,0.02); display: flex; flex-direction: column; justify-content: space-between; }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+        .price { font-weight: bold; color: var(--brand-color); font-size: 1.2rem; }
+        .btn-sm { padding: 6px 12px; font-size: 0.85rem; background: transparent; border: 1px solid var(--brand-color); color: var(--brand-color); }
+        .btn-sm:hover { background: var(--brand-color); color: white; }
+        
+        .steps { display: flex; justify-content: space-around; flex-wrap: wrap; text-align: center; gap: 20px; margin: 2rem 0; }
+        .step { flex: 1; min-width: 200px; padding: 15px; }
+        .step-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .cart-preview { position: fixed; bottom: 20px; right: 20px; background: var(--brand-color); color: white; padding: 15px 25px; border-radius: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-weight: bold; cursor: pointer; z-index: 1000; }
+        
+        footer { text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo">🍔 BiteDash</a>
+        <nav>
+            <a href="#menu">Browse Menu</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Support</a>
+        </nav>
+    </header>
+    <hr>
+
+    <!-- Hero Interactive Headline -->
+    <section class="hero">
+        <h1>Premium Flavors Delivered Straight to Your Doorstep</h1>
+        <p>Order from top local chef kitchens and premium restaurants. Fast delivery, fresh food, zero hassle.</p>
+        <div style="margin-top: 20px;">
+            <input type="text" placeholder="Enter your delivery address..." style="width: 60%; display: inline-block; margin-right: 10px;">
+            <button onclick="scrollToMenu()">Find Food</button>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <h2 id="how-it-works" class="section-title">Hungry? Order in 3 Simple Steps</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-icon">📍</div>
+            <h3>1. Choose Location</h3>
+            <p>Enter your address to discover premium dining spots delivering right to your neighborhood.</p>
+        </div>
+        <div class="step">
+            <div class="step-icon">🍕</div>
+            <h3>2. Pick Your Feast</h3>
+            <p>Browse vast culinary menus featuring everything from artisan street food to fine dynamic desserts.</p>
+        </div>
+        <div class="step">
+            <div class="step-icon">🛵</div>
+            <h3>3. Lightning Delivery</h3>
+            <p>Our fleet routes orders instantly to ensure food arrives steaming hot and ready to enjoy.</p>
+        </div>
+    </div>
+
+    <!-- Active Menu Board Section -->
+    <h2 id="menu" class="section-title">Today's Trending Cuisines</h2>
+    <div class="grid">
+        <!-- Item 1 -->
+        <div class="card">
+            <div>
+                <img src="https://unsplash.com" alt="Truffle Burger">
+                <h3>The Smokehouse Truffle Burger</h3>
+                <p>Aged angus beef, melted Swiss gruyère, caramelized wild onions, and signature white truffle aioli on a brioche bun.</p>
+            </div>
+            <div class="card-meta">
+                <span class="price">$14.99</span>
+                <button class="btn-sm" onclick="addToCart('Truffle Burger', 14.99)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="card">
+            <div>
+                <img src="https://unsplash.com" alt="Artisan Pizza">
+                <h3>Spicy Hot Honey Pepperoni</h3>
+                <p>Wood-fired sourdough crust, crushed San Marzano tomatoes, fresh mozzarella, spicy salami, drizzled with organic hot honey.</p>
+            </div>
+            <div class="card-meta">
+                <span class="price">$17.50</span>
+                <button class="btn-sm" onclick="addToCart('Hot Honey Pizza', 17.50)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="card">
+            <div>
+                <img src="https://unsplash.com" alt="Salmon Bowl">
+                <h3>Zesty Sesame Salmon Bowl</h3>
+                <p>Pan-seared Atlantic salmon over wild brown rice, sliced avocados, edamame, shredded carrots, and sweet ginger soy glaze.</p>
+            </div>
+            <div class="card-meta">
+                <span class="price">$16.25</span>
+                <button class="btn-sm" onclick="addToCart('Salmon Bowl', 16.25)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Module -->
+    <h2 id="testimonials" class="section-title">What Hungry Diners Say</h2>
+    <div class="grid">
+        <div style="padding: 15px; border-left: 4px solid var(--brand-color); background: rgba(0,0,0,0.02)">
+            <p><em>"The food arrived 10 minutes ahead of schedule and the Hot Honey Pepperoni pizza was still crisp! BiteDash is my absolute go-to every Friday night."</em></p>
+            <strong>— Marcus V.</strong>
+        </div>
+        <div style="padding: 15px; border-left: 4px solid var(--brand-color); background: rgba(0,0,0,0.02)">
+            <p><em>"Incredibly smooth packaging. The salmon bowl was beautifully arrayed and fresh. Customer service handled my custom allergy note flawlessly."</em></p>
+            <strong>— Clara T.</strong>
+        </div>
+    </div>
+
+    <!-- Contact & Checkout Form Section -->
+    <h2 id="contact" class="section-title">Need Help with an Order?</h2>
+    <p style="text-align: center;">Have a corporate catering request or an issue with your delivery driver? Drop our dispatch desk a direct message.</p>
+    
+    <form onsubmit="handleFormSubmit(event)" style="max-width: 600px; margin: 0 auto;">
+        <label for="usrname">Full Name</label>
+        <input type="text" id="usrname" required placeholder="Jane Doe">
+
+        <label for="usrmail">Email Address</label>
+        <input type="email" id="usrmail" required placeholder="jane@example.com">
+
+        <label for="issue">How can we help?</label>
+        <textarea id="issue" rows="4" required placeholder="Describe your request or missing item details..."></textarea>
+
+        <button type="submit" style="background-color: var(--brand-color); color: white; width: 100%;">Send Message</button>
+    </form>
+
+    <!-- Floating Sticky Cart Widget -->
+    <div class="cart-preview" id="cartWidget" onclick="checkoutAlert()">
+        🛒 Cart: <span id="cartCount">0</span> items (<span id="cartTotal">$0.00</span>)
+    </div>
+
+    <!-- System Footer -->
+    <footer>
+        <p>&copy; 2026 BiteDash Inc. All culinary assets and items prepared by authorized food safety handling facilities.</p>
+        <p><a href="#">Terms of Service</a> | <a href="#">Merchant Portal</a> | <a href="#">Driver Sign Up</a></p>
+    </footer>
+
+    <!-- System Core JavaScript Logic -->
+    <script>
+        let itemCount = 0;
+        let runningTotal = 0.00;
+
+        function scrollToMenu() {
+            document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function addToCart(itemName, price) {
+            itemCount += 1;
+            runningTotal += price;
+            
+            // Update visual elements
+            document.getElementById('cartCount').innerText = itemCount;
+            document.getElementById('cartTotal').innerText = '$' + runningTotal.toFixed(2);
+            
+            // Quick visual animation trigger
+            const widget = document.getElementById('cartWidget');
+            widget.style.transform = 'scale(1.1)';
+            setTimeout(() => { widget.style.transform = 'scale(1)'; }, 150);
+        }
+
+        function checkoutAlert() {
+            if (itemCount === 0) {
